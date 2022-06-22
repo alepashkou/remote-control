@@ -1,6 +1,8 @@
 import { WebSocket } from 'ws';
 import { circle, square, rectangle } from './draw.js';
 import { up, down, left, right, position } from './mouseControls.js';
+import { printScreen } from './printScreen.js';
+
 export const controller = (ws: WebSocket, data: string) => {
   const param = data.split(' ');
   switch (param[0]) {
@@ -27,6 +29,9 @@ export const controller = (ws: WebSocket, data: string) => {
       break;
     case 'draw_rectangle':
       rectangle(+param[1], +param[2], ws);
+      break;
+    case 'prnt_scrn':
+      printScreen(ws);
       break;
     default:
       console.log('incorrect param');
