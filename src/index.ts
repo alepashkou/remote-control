@@ -1,9 +1,9 @@
 import 'dotenv/config';
-// import Jimp from 'jimp';
 import { httpServer } from './http_server/index.js';
-import { WebSocketServer } from 'ws';
+import { WebSocketServer, createWebSocketStream } from 'ws';
 import { WebSocket } from 'ws';
 import { controller } from './modules/controller.js';
+import internal from 'stream';
 
 //HTTP SERVER
 try {
@@ -19,8 +19,12 @@ try {
   const WEBSOCKET_PORT: number = +process.env.WEBSOCKET_PORT || 8080;
   const wss = new WebSocketServer({ port: WEBSOCKET_PORT });
   wss.on('connection', (ws: WebSocket) => {
-    ws.on('message', (data: string) => {
-      controller(ws, data.toString());
+    const wsStream: internal.Duplex = createWebSocketStream(ws, {
+      encoding: 'utf8',
+      decodeStrings: false,
+    });
+    wsStream.on('data', (data) => {
+      controller(wsStream, data.toString());
     });
   });
   console.log(`Start webscoket server on the ${WEBSOCKET_PORT} port!`);

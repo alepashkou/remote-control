@@ -1,9 +1,9 @@
-import { WebSocket } from 'ws';
 import { circle, square, rectangle } from './draw.js';
 import { up, down, left, right, position } from './mouseControls.js';
 import { printScreen } from './printScreen.js';
+import internal from 'stream';
 
-export const controller = (ws: WebSocket, data: string) => {
+export const controller = (ws: internal.Duplex, data: string) => {
   const param = data.split(' ');
   switch (param[0]) {
     case 'mouse_up':

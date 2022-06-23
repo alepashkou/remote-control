@@ -1,7 +1,7 @@
 import robot from 'robotjs';
-import { WebSocket } from 'ws';
+import internal from 'stream';
 
-export const circle = (offset: number, ws: WebSocket) => {
+export const circle = (offset: number, ws: internal.Duplex) => {
   try {
     const points = 100;
     const currentPosition = robot.getMousePos();
@@ -20,12 +20,12 @@ export const circle = (offset: number, ws: WebSocket) => {
       if (index === 0) robot.mouseToggle('down');
       if (index === output_points.length - 1) robot.mouseToggle('up');
     });
-    ws.send('draw_circle');
+    ws.write('draw_circle');
   } catch (e) {
     console.log('incorrect param');
   }
 };
-export const square = (offset: number, ws: WebSocket) => {
+export const square = (offset: number, ws: internal.Duplex) => {
   try {
     const currentPosition = robot.getMousePos();
     const firstPoint = {
@@ -52,13 +52,17 @@ export const square = (offset: number, ws: WebSocket) => {
     robot.moveMouse(fourPoint.x, fourPoint.y);
     robot.moveMouse(firstPoint.x, firstPoint.y);
     robot.mouseToggle('up');
-    ws.send('draw_square');
+    ws.write('draw_square');
   } catch (e) {
     console.log('incorrect param');
   }
 };
 
-export const rectangle = (width: number, height: number, ws: WebSocket) => {
+export const rectangle = (
+  width: number,
+  height: number,
+  ws: internal.Duplex
+) => {
   try {
     const currentPosition = robot.getMousePos();
     const firstPoint = {
@@ -85,7 +89,7 @@ export const rectangle = (width: number, height: number, ws: WebSocket) => {
     robot.moveMouse(fourPoint.x, fourPoint.y);
     robot.moveMouse(firstPoint.x, firstPoint.y);
     robot.mouseToggle('up');
-    ws.send('draw_square');
+    ws.write('draw_square');
   } catch (e) {
     console.log('incorrect param');
   }

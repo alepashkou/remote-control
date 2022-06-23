@@ -1,45 +1,46 @@
 import robot from 'robotjs';
-import { WebSocket } from 'ws';
-export const up = (offset: number, ws: WebSocket) => {
+import internal from 'stream';
+
+export const up = (offset: number, ws: internal.Duplex) => {
   try {
     const currentPosition = robot.getMousePos();
     robot.moveMouse(currentPosition.x, currentPosition.y - offset);
-    ws.send(`mouse_up`);
+    ws.write(`mouse_up`);
   } catch (e) {
     console.log('incorrect param');
   }
 };
-export const down = (offset: number, ws: WebSocket) => {
+export const down = (offset: number, ws: internal.Duplex) => {
   try {
     const currentPosition = robot.getMousePos();
     robot.moveMouse(currentPosition.x, currentPosition.y + offset);
-    ws.send(`mouse_down`);
+    ws.write(`mouse_down`);
   } catch (e) {
     console.log('incorrect param');
   }
 };
-export const left = (offset: number, ws: WebSocket) => {
+export const left = (offset: number, ws: internal.Duplex) => {
   try {
     const currentPosition = robot.getMousePos();
     robot.moveMouse(currentPosition.x - offset, currentPosition.y);
-    ws.send(`mouse_left`);
+    ws.write(`mouse_left`);
   } catch (e) {
     console.log('incorrect param');
   }
 };
-export const right = (offset: number, ws: WebSocket) => {
+export const right = (offset: number, ws: internal.Duplex) => {
   try {
     const currentPosition = robot.getMousePos();
     robot.moveMouse(currentPosition.x + offset, currentPosition.y);
-    ws.send(`mouse_right`);
+    ws.write(`mouse_right`);
   } catch (e) {
     console.log('incorrect param');
   }
 };
-export const position = (ws: WebSocket) => {
+export const position = (ws: internal.Duplex) => {
   try {
     const currentPosition = robot.getMousePos();
-    ws.send(`mouse_position {${currentPosition.x}},{${currentPosition.y}}`);
+    ws.write(`mouse_position {${currentPosition.x}},{${currentPosition.y}}`);
   } catch (e) {
     console.log('incorrect param');
   }
