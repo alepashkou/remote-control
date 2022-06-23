@@ -1,7 +1,7 @@
 import robot from 'robotjs';
 import internal from 'stream';
 
-export const up = (offset: number, ws: internal.Duplex) => {
+export const up = (offset: number, ws: internal.Duplex): void => {
   try {
     const currentPosition = robot.getMousePos();
     robot.moveMouse(currentPosition.x, currentPosition.y - offset);
@@ -10,7 +10,7 @@ export const up = (offset: number, ws: internal.Duplex) => {
     console.log('incorrect param');
   }
 };
-export const down = (offset: number, ws: internal.Duplex) => {
+export const down = (offset: number, ws: internal.Duplex): void => {
   try {
     const currentPosition = robot.getMousePos();
     robot.moveMouse(currentPosition.x, currentPosition.y + offset);
@@ -19,7 +19,7 @@ export const down = (offset: number, ws: internal.Duplex) => {
     console.log('incorrect param');
   }
 };
-export const left = (offset: number, ws: internal.Duplex) => {
+export const left = (offset: number, ws: internal.Duplex): void => {
   try {
     const currentPosition = robot.getMousePos();
     robot.moveMouse(currentPosition.x - offset, currentPosition.y);
@@ -28,7 +28,7 @@ export const left = (offset: number, ws: internal.Duplex) => {
     console.log('incorrect param');
   }
 };
-export const right = (offset: number, ws: internal.Duplex) => {
+export const right = (offset: number, ws: internal.Duplex): void => {
   try {
     const currentPosition = robot.getMousePos();
     robot.moveMouse(currentPosition.x + offset, currentPosition.y);
@@ -37,7 +37,7 @@ export const right = (offset: number, ws: internal.Duplex) => {
     console.log('incorrect param');
   }
 };
-export const position = (ws: internal.Duplex) => {
+export const position = (ws: internal.Duplex): void => {
   try {
     const currentPosition = robot.getMousePos();
     ws.write(`mouse_position {${currentPosition.x}},{${currentPosition.y}}`);

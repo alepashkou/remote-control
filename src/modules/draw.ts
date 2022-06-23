@@ -1,7 +1,7 @@
 import robot from 'robotjs';
 import internal from 'stream';
 
-export const circle = (offset: number, ws: internal.Duplex) => {
+export const circle = (offset: number, ws: internal.Duplex): void => {
   try {
     const points = 100;
     const currentPosition = robot.getMousePos();
@@ -25,7 +25,7 @@ export const circle = (offset: number, ws: internal.Duplex) => {
     console.log('incorrect param');
   }
 };
-export const square = (offset: number, ws: internal.Duplex) => {
+export const square = (offset: number, ws: internal.Duplex): void => {
   try {
     const currentPosition = robot.getMousePos();
     const firstPoint = {
@@ -62,7 +62,7 @@ export const rectangle = (
   width: number,
   height: number,
   ws: internal.Duplex
-) => {
+): void => {
   try {
     const currentPosition = robot.getMousePos();
     const firstPoint = {
