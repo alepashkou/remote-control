@@ -1,30 +1,26 @@
-# RSSchool NodeJS websocket task template
-> Static http server and base task packages.
+# CRUD API
 
-## Installation
-1. Clone/download repo
-2. `npm install`
+# Technologies
 
-## Usage
-**Development**
+- typescript
+- nodemon
+- dotenv
+- ts-node
+- node.js 16
 
-`npm run start:dev`
+## Install
 
-* App served @ `http://localhost:8181` with nodemon
+    npm i
 
-**Production**
+## Scripts
 
-`npm run start`
+    npm run start:dev - to start development server
 
-* App served @ `http://localhost:8181` without nodemon
+    npm run start:prod - to start production server
 
----
+## Parameters
 
-**All commands**
+    http server start on 3000 port
+    webscoket server start on 8080 port
 
-Command | Description
---- | ---
-`npm run dev` | App served @ `http://localhost:8181` with nodemon
-`npm run start` | App served @ `http://localhost:8181` without nodemon
-
-**Note**: replace `npm` with `yarn` in `package.json` if you use yarn.
+#### If you have any questions, write me in the discord. (Krakozyabchik#0988)
