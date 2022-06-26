@@ -11,6 +11,7 @@ try {
   httpServer.listen(HTTP_PORT, () => {
     console.log(`Start static http server on the ${HTTP_PORT} port!`);
   });
+  httpServer.on('error', (err) => console.log('Http server closed'));
 } catch (e) {
   console.log(`Server http err `, e);
 }
@@ -24,9 +25,12 @@ try {
       decodeStrings: false,
     });
     wsStream.on('data', (data) => {
+      console.log(data);
       controller(wsStream, data.toString());
     });
+    wsStream.on('error', () => console.log('Websocket closed'));
   });
+  wss.on('error', () => console.log(`Websocket server closed`));
   console.log(`Start webscoket server on the ${WEBSOCKET_PORT} port!`);
 } catch (e) {
   console.log(`Server websocket err `, e);
